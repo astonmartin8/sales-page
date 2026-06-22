@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Magnetic Man — Paul Roten</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --black:#0A0A0A; --dark:#111111; --card:#181818; --border:#252525;
+  --red:#C41E3A; --red-dim:#8B1528; --gold:#D4A843; --gold-dim:#9a7820;
+  --white:#F2F2F2; --muted:#777; --green:#27AE60;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased;}
+
+/* TOPBAR */
+.topbar{background:var(--red);text-align:center;padding:11px 20px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;}
+.topbar span{color:var(--gold);}
+
+/* HERO */
+.hero{background:var(--dark);border-bottom:1px solid var(--border);padding:80px 20px 90px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-150px;left:50%;transform:translateX(-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(196,30,58,.1) 0%,transparent 68%);pointer-events:none;}
+.hero-eyebrow{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--red);border:1px solid var(--red-dim);padding:5px 14px;border-radius:2px;margin-bottom:28px;}
+.hero h1{font-family:'Barlow Condensed',sans-serif;font-size:clamp(54px,9.5vw,112px);font-weight:900;line-height:.9;text-transform:uppercase;letter-spacing:-.01em;margin-bottom:30px;}
+.hero h1 .line-red{color:var(--red);display:block;}
+.hero h1 .line-sub{display:block;font-size:.48em;font-weight:600;color:var(--gold);letter-spacing:.04em;margin-top:12px;line-height:1.4;}
+.hero-sub{max-width:580px;margin:0 auto 46px;font-size:18px;line-height:1.65;color:#bbb;}
+.hero-sub strong{color:var(--white);}
+
+/* BUTTONS */
+.btn-primary{display:inline-block;background:var(--red);color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;padding:18px 50px;border-radius:3px;text-decoration:none;transition:background .2s,transform .15s;cursor:pointer;border:none;}
+.btn-primary:hover{background:#a01830;transform:translateY(-1px);}
+.price-tag{font-size:13px;color:var(--muted);margin-top:14px;}
+.price-tag strong{color:var(--gold);font-size:15px;}
+
+/* TRUST */
+.trust-bar{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;padding:26px 20px;border-bottom:1px solid var(--border);background:var(--dark);}
+.trust-item{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--muted);font-weight:500;}
+.trust-item .dot{width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0;}
+
+/* SECTIONS */
+.section{padding:80px 20px;}
+.section-alt{background:var(--dark);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.container{max-width:760px;margin:0 auto;}
+.container-wide{max-width:1020px;margin:0 auto;}
+.section-label{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin-bottom:16px;}
+.section-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(32px,5vw,54px);font-weight:800;text-transform:uppercase;line-height:1.03;margin-bottom:22px;}
+.section-title .gold{color:var(--gold);}
+.lead{font-size:17px;line-height:1.75;color:#bbb;margin-bottom:20px;}
+.lead strong{color:var(--white);}
+
+/* PAIN */
+.pain-list{list-style:none;margin:30px 0;}
+.pain-list li{padding:13px 0 13px 28px;position:relative;border-bottom:1px solid var(--border);font-size:16px;color:#ccc;}
+.pain-list li::before{content:'✗';position:absolute;left:0;color:var(--red);font-weight:700;}
+
+/* STORY QUOTE */
+.story-quote{border-left:3px solid var(--red);padding:20px 24px;background:#141010;border-radius:0 4px 4px 0;margin:28px 0;font-size:16px;color:#ccc;font-style:italic;line-height:1.7;}
+.story-quote cite{display:block;margin-top:10px;font-style:normal;font-size:13px;color:var(--muted);font-weight:600;}
+
+/* TRANSFORM */
+.transform-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:40px 0;border-radius:4px;overflow:hidden;}
+.transform-col{padding:30px 26px;}
+.transform-col.before{background:#141414;}
+.transform-col.after{background:#140c0e;}
+.transform-col h3{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px;padding-bottom:12px;border-bottom:2px solid;}
+.transform-col.before h3{color:var(--muted);border-color:var(--border);}
+.transform-col.after h3{color:var(--red);border-color:var(--red);}
+.transform-col ul{list-style:none;}
+.transform-col ul li{padding:7px 0 7px 20px;position:relative;font-size:15px;line-height:1.4;}
+.before ul li{color:#555;}
+.before ul li::before{content:'—';position:absolute;left:0;color:#333;}
+.after ul li{color:#ccc;}
+.after ul li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:700;}
+
+/* BIG BULLET LIST */
+.learn-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:32px 0;}
+.learn-item{display:flex;gap:14px;padding:14px 16px;border-bottom:1px solid var(--border);}
+.learn-item:nth-child(odd){border-right:1px solid var(--border);}
+.learn-icon{color:var(--gold);font-size:18px;flex-shrink:0;margin-top:1px;}
+.learn-item p{font-size:14px;color:#ccc;line-height:1.5;}
+.learn-item p strong{color:var(--white);display:block;margin-bottom:2px;font-size:15px;}
+
+/* TESTIMONIALS */
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:40px;}
+.testi-card{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:28px 24px;}
+.testi-stars{color:var(--gold);font-size:15px;margin-bottom:14px;}
+.testi-text{font-size:15px;line-height:1.65;color:#ccc;font-style:italic;margin-bottom:16px;}
+.testi-name{font-size:13px;color:var(--muted);font-weight:500;}
+
+/* ORDER SECTION */
+.offer-card{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:36px 32px;position:relative;}
+.offer-card.featured{border-color:var(--red);background:#130810;}
+.offer-badge{position:absolute;top:-13px;left:28px;background:var(--red);color:#fff;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 12px;border-radius:2px;}
+.offer-card h3{font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:900;text-transform:uppercase;margin-bottom:8px;}
+.offer-desc{font-size:15px;color:#aaa;margin-bottom:22px;line-height:1.6;}
+.offer-price{font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:900;color:var(--gold);line-height:1;margin-bottom:4px;}
+.offer-price-note{font-size:12px;color:var(--muted);margin-bottom:22px;}
+.offer-includes{list-style:none;margin-bottom:26px;border-top:1px solid var(--border);padding-top:18px;}
+.offer-includes li{padding:7px 0 7px 22px;position:relative;font-size:14px;color:#ccc;}
+.offer-includes li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:700;}
+
+/* ORDER BUMP */
+.order-bump{border:2px dashed var(--gold-dim);border-radius:4px;padding:24px;background:#110f06;margin:24px 0;}
+.order-bump-label{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+.order-bump h4{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;text-transform:uppercase;margin-bottom:8px;}
+.order-bump p{font-size:14px;color:#aaa;line-height:1.55;margin-bottom:14px;}
+.bump-checkbox{display:flex;align-items:flex-start;gap:12px;cursor:pointer;}
+.bump-checkbox input[type=checkbox]{width:20px;height:20px;flex-shrink:0;margin-top:2px;accent-color:var(--gold);cursor:pointer;}
+.bump-checkbox label{font-size:14px;color:#ccc;cursor:pointer;line-height:1.5;}
+.bump-checkbox label strong{color:var(--gold);}
+
+/* GUARANTEE */
+.guarantee{display:flex;gap:28px;align-items:flex-start;background:var(--card);border:1px solid var(--border);border-radius:4px;padding:32px 28px;margin-top:40px;}
+.guarantee-icon{font-size:52px;flex-shrink:0;line-height:1;}
+.guarantee h3{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:800;text-transform:uppercase;margin-bottom:10px;color:var(--green);}
+.guarantee p{font-size:15px;color:#aaa;line-height:1.65;}
+
+/* FAQ */
+.faq-item{border-bottom:1px solid var(--border);padding:22px 0;}
+.faq-q{font-size:16px;font-weight:600;color:var(--white);margin-bottom:10px;}
+.faq-a{font-size:15px;color:#aaa;line-height:1.65;}
+
+/* FINAL CTA */
+.final-cta{background:linear-gradient(135deg,#140508 0%,#0a0a0a 50%,#12090b 100%);border-top:1px solid var(--border);text-align:center;padding:100px 20px;}
+.final-cta h2{font-family:'Barlow Condensed',sans-serif;font-size:clamp(38px,6vw,74px);font-weight:900;text-transform:uppercase;line-height:.93;margin-bottom:24px;}
+.final-cta h2 em{color:var(--red);font-style:normal;}
+
+/* MODAL OVERLAY */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:900;justify-content:center;align-items:center;padding:20px;}
+.modal-overlay.active{display:flex;}
+.modal-box{background:var(--dark);border:1px solid var(--border);border-radius:6px;padding:44px 40px;max-width:480px;width:100%;text-align:center;position:relative;}
+.modal-box h3{font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:900;text-transform:uppercase;margin-bottom:10px;}
+.modal-box h3 span{color:var(--red);}
+.modal-box .modal-sub{font-size:15px;color:#aaa;margin-bottom:28px;line-height:1.6;}
+.modal-form{display:flex;flex-direction:column;gap:14px;}
+.modal-form input{background:#111;border:1px solid var(--border);border-radius:3px;padding:14px 16px;font-size:15px;color:var(--white);outline:none;transition:border-color .2s;font-family:'Inter',sans-serif;}
+.modal-form input:focus{border-color:var(--red);}
+.modal-form input::placeholder{color:#555;}
+.modal-form .btn-primary{width:100%;text-align:center;padding:16px 20px;font-size:20px;}
+.modal-privacy{font-size:11px;color:#444;margin-top:10px;line-height:1.6;}
+.modal-close{position:absolute;top:14px;right:18px;background:none;border:none;color:#444;font-size:22px;cursor:pointer;line-height:1;}
+.modal-close:hover{color:#777;}
+
+/* UPSELL / DOWNSELL PAGES */
+#upsell-page,#downsell-page{display:none;position:fixed;inset:0;background:var(--black);z-index:1000;overflow-y:auto;}
+.upsell-inner{max-width:700px;margin:0 auto;padding:60px 20px 90px;text-align:center;}
+.upsell-eyebrow{display:inline-block;background:var(--red);color:#fff;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:6px 16px;border-radius:2px;margin-bottom:28px;}
+.upsell-inner h2{font-family:'Barlow Condensed',sans-serif;font-size:clamp(38px,6.5vw,68px);font-weight:900;text-transform:uppercase;line-height:.92;margin-bottom:24px;}
+.upsell-inner h2 .gold{color:var(--gold);}
+.upsell-inner .lead{max-width:580px;margin:0 auto 28px;}
+.upsell-big-list{text-align:left;background:var(--card);border:1px solid var(--border);border-radius:4px;padding:28px 32px;margin:32px 0;}
+.upsell-big-list h4{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:18px;}
+.upsell-big-list ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:0;}
+.upsell-big-list ul li{padding:9px 0 9px 22px;position:relative;font-size:14px;color:#ccc;border-bottom:1px solid var(--border);line-height:1.4;}
+.upsell-big-list ul li:nth-child(odd){border-right:1px solid var(--border);padding-right:16px;}
+.upsell-big-list ul li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:700;}
+.upsell-price{font-family:'Barlow Condensed',sans-serif;font-size:60px;font-weight:900;color:var(--gold);line-height:1;margin-bottom:6px;}
+.upsell-price-note{font-size:13px;color:var(--muted);margin-bottom:30px;}
+.upsell-decline{display:block;margin-top:18px;font-size:13px;color:#3a3a3a;cursor:pointer;text-decoration:underline;transition:color .2s;}
+.upsell-decline:hover{color:#666;}
+.upsell-story{background:#0f0d0d;border:1px solid var(--border);border-radius:4px;padding:24px 28px;margin:28px 0;text-align:left;}
+.upsell-story p{font-size:15px;color:#bbb;line-height:1.7;font-style:italic;}
+.upsell-story cite{display:block;margin-top:10px;font-style:normal;font-size:13px;color:var(--muted);}
+
+/* THANK YOU PAGE */
+#thankyou-page{display:none;position:fixed;inset:0;background:var(--black);z-index:2000;overflow-y:auto;}
+.ty-inner{max-width:660px;margin:0 auto;padding:80px 20px;}
+.ty-check{width:72px;height:72px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 28px;font-size:30px;}
+.ty-inner h2{font-family:'Barlow Condensed',sans-serif;font-size:52px;font-weight:900;text-transform:uppercase;margin-bottom:10px;text-align:center;}
+.ty-inner>.ty-sub{font-size:16px;color:#aaa;margin-bottom:40px;text-align:center;line-height:1.6;}
+.ty-steps{margin-bottom:36px;}
+.ty-step{display:flex;gap:18px;align-items:flex-start;padding:18px 0;border-bottom:1px solid var(--border);}
+.ty-step-num{width:36px;height:36px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:800;flex-shrink:0;}
+.ty-step h4{font-size:15px;font-weight:600;margin-bottom:4px;}
+.ty-step p{font-size:13px;color:var(--muted);line-height:1.5;}
+.download-list{margin-bottom:28px;}
+.download-item{display:flex;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--border);border-radius:4px;padding:18px 20px;margin-bottom:10px;gap:16px;}
+.download-item-info h4{font-size:15px;font-weight:600;margin-bottom:3px;}
+.download-item-info span{font-size:12px;color:var(--muted);}
+.download-btn{background:var(--red);color:#fff;font-size:13px;font-weight:600;padding:10px 20px;border-radius:3px;text-decoration:none;white-space:nowrap;flex-shrink:0;transition:opacity .2s;}
+.download-btn.bonus{background:var(--gold);color:#000;}
+.download-btn:hover{opacity:.85;}
+.ty-note{padding:20px;background:var(--card);border:1px solid var(--border);border-radius:4px;font-size:13px;color:var(--muted);text-align:center;}
+
+/* FOOTER */
+footer{background:#080808;border-top:1px solid var(--border);padding:32px 20px;text-align:center;font-size:12px;color:#333;}
+footer a{color:#3a3a3a;text-decoration:none;}
+footer a:hover{color:#666;}
+
+/* RESPONSIVE */
+@media(max-width:640px){
+  .transform-grid,.learn-grid{grid-template-columns:1fr;}
+  .learn-item:nth-child(odd){border-right:none;}
+  .upsell-big-list ul{grid-template-columns:1fr;}
+  .upsell-big-list ul li:nth-child(odd){border-right:none;padding-right:0;}
+  .guarantee{flex-direction:column;}
+  .modal-box{padding:32px 24px;}
+  .download-item{flex-direction:column;align-items:flex-start;}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">🔥 Today only — <a href="#faq-go-get-them" style="color:var(--gold);text-decoration:underline;cursor:pointer;">'Go Get Them'</a> e-Book For FREE with every order</div>
+
+<!-- ════════════════════════════════════
+     SALES PAGE
+════════════════════════════════════ -->
+<div id="sales-page">
+
+<section class="hero">
+  <div class="hero-eyebrow">Paul Roten · Official</div>
+  <h1>
+    <span>The Magnetic</span>
+    <span class="line-red">Man</span>
+    <span class="line-sub">Become the man women notice, approach, and can't stop thinking about</span>
+  </h1>
+  <p class="hero-sub"><strong>Same face. Same body. Completely different results.</strong><br>The only thing standing between you and the women you want is knowledge you don't have yet.</p>
+  <a href="#order" class="btn-primary">Get Instant Access — $39</a>
+  <p class="price-tag">One-time payment · Instant PDF delivery</p>
+</section>
+
+<div class="trust-bar">
+  <div class="trust-item"><span class="dot"></span>Hundreds of men transformed</div>
+  <div class="trust-item"><span class="dot"></span>30-day money-back guarantee</div>
+  <div class="trust-item"><span class="dot"></span>Instant PDF download</div>
+  <div class="trust-item"><span class="dot"></span>Stripe & PayPal — secure checkout</div>
+</div>
+
+<!-- PAIN -->
+<section class="section">
+  <div class="container">
+    <p class="section-label">Be honest with yourself</p>
+    <h2 class="section-title">Does any of this sound <span class="gold">familiar?</span></h2>
+    <p class="lead">You see a woman you want. You feel something. And then — nothing. You walk past. Not because you're ugly or broke. Because nobody ever taught you what actually works.</p>
+    <ul class="pain-list">
+      <li>You see attractive women every single day and do nothing</li>
+      <li>You freeze up exactly when it matters — you know what you want to say, but the words don't come</li>
+      <li>You've been friend-zoned so many times it almost feels like your personality</li>
+      <li>Women seem interested at first and then go cold — and you never know why</li>
+      <li>You've read things about seduction but still feel completely lost when you're actually in front of her</li>
+      <li>You watch other men — less attractive, less intelligent, less decent than you — succeed easily</li>
+      <li>You settle for women you're not really that into because you don't believe the ones you want are within reach</li>
+    </ul>
+    <p class="lead"><strong>None of this is your fault. You're living below your possibilities because you haven't had the right education yet.</strong> That ends today.</p>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="section section-alt">
+  <div class="container">
+    <p class="section-label">My story</p>
+    <h2 class="section-title">I was <span class="gold">exactly</span> where you are</h2>
+    <p class="lead">I'm moderately good-looking — at least that's what women tell me. But for a long time I had no courage to start a conversation. When I finally did manage it, I always messed something up. I felt tiny standing next to a pretty girl.</p>
+    <div class="story-quote">"I changed my beliefs and learned what to do and what to say — with the same face and the same body — and got completely different results. And now I know that you're capable of finding yourself a girlfriend, maybe even in one day."<cite>— Paul Roten</cite></div>
+    <p class="lead">At 22, my day looked like this: I'd wake up around noon, go buy something for breakfast, and spend the rest of the day meeting women or on dates. I was renting a room in a city. One day my landlord stopped me and said: <em>"You really know how to live — you get up at noon and beautiful women keep showing up to see you."</em></p>
+    <p class="lead">There was a six-month period where there wasn't a single day I spent without a woman's company. <strong>I had the same face and body as before. The only thing that changed was what I knew.</strong> That knowledge is what you're about to get.</p>
+  </div>
+</section>
+
+<!-- TRANSFORMATION -->
+<section class="section">
+  <div class="container">
+    <p class="section-label">The transformation</p>
+    <h2 class="section-title">Before & <span class="gold">After</span></h2>
+    <div class="transform-grid">
+      <div class="transform-col before">
+        <h3>Before</h3>
+        <ul>
+          <li>Women barely notice you</li>
+          <li>You wait for a "right moment" that never comes</li>
+          <li>Attractive women feel completely out of reach</li>
+          <li>You accept whatever scraps of attention you can get</li>
+          <li>Dates feel like job interviews you're losing</li>
+          <li>You feel invisible next to a pretty girl</li>
+          <li>You spend evenings alone wondering what's wrong with you</li>
+        </ul>
+      </div>
+      <div class="transform-col after">
+        <h3>After</h3>
+        <ul>
+          <li>Women look back at you — twice</li>
+          <li>You approach without overthinking because you know what to do</li>
+          <li>Attractive women are people, not pedestals</li>
+          <li>You choose — you're not chosen at random</li>
+          <li>Dates flow because you know who you are and what you want</li>
+          <li>You feel powerful in the company of beautiful women</li>
+          <li>Your friends ask what changed — you just smile</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT YOU'LL LEARN -->
+<section class="section section-alt">
+  <div class="container-wide">
+    <p class="section-label" style="text-align:center">Inside The Magnetic Man</p>
+    <h2 class="section-title" style="text-align:center">Everything you'll <span class="gold">learn</span></h2>
+    <p class="lead" style="text-align:center;max-width:620px;margin:0 auto 40px;">This isn't a list of pickup lines to memorise. This is the knowledge that enters your brain and changes how you think about yourself — and how women think about you.</p>
+    <div class="learn-grid">
+      <div class="learn-item">
+        <div class="learn-icon">👔</div>
+        <p><strong>How to dress so women consider you first</strong>Which clothing elements send a message about your strength before you open your mouth — and the one item women pay the most attention to</p>
+      </div>
+      <div class="learn-item">
+        <div class="learn-icon">💬</div>
+        <p><strong>How to speak so women listen with their mouths open</strong>What to say to create an irresistible desire to keep talking — and how to become the most interesting man she's spoken to all week</p>
+      </div>
+      <div class="learn-item">
+        <div class="learn-icon">⚡</div>
+        <p><strong>The masculine attribute that creates instant chemistry</strong>The single quality that makes a woman's attention snap to you — and exactly how to embody it without performing anything</p>
+      </div>
+      <div class="learn-item">
+        <div class="learn-icon">😏</div>
+        <p><strong>How to flirt — with real techniques and examples</strong>What flirting actually is, why most men get it completely wrong, and the golden rule for men who want something real rather than just a one-night thing</p>
+      </div>
+      <div class="learn-item">
+        <div class="learn-icon">🎯</div>
+        <p><strong>How to build higher value in her eyes</strong>So beautiful women see you as their equal — or better. The specific mindset that makes attractive women stop feeling like an unreachable trophy</p>
+      </div>
+      <div class="learn-item">
+        <div class="learn-icon">😂</div>
+        <p><strong>How to use humour to stand out from every other man</strong>Not joke-telling — the specific kind of humour that makes women want more of you and programmes you into her mind as someone special</p>
+      </div>
+      <div class="learn-item">
+        <div class="learn-icon">🔥</div>
+        <p><strong>What women's real needs actually are</strong>Understanding this gives you power over women in a way that no tactic can replicate — because you'll know what they're actually responding to</p>
+      </div>
+      <div class="learn-item">
+        <div class="learn-icon">🧠</div>
+        <p><strong>How to be so that they never get bored of you</strong>The specific behaviour that keeps her finding you interesting, unpredictable, and worth her continued attention — month after month</p>
+      </div>
+      <div class="learn-item">
+        <div class="learn-icon">💪</div>
+        <p><strong>How to build real confidence — with a roadmap</strong>Not fake it-till-you-make-it advice. A concrete path to becoming someone who genuinely feels powerful in the company of beautiful women</p>
+      </div>
+      <div class="learn-item">
+        <div class="learn-icon">🪞</div>
+        <p><strong>Things about yourself you don't even know yet</strong>I'll show you qualities you have right now that women respond to — strengths you've been ignoring that will change how you carry yourself</p>
+      </div>
+      <div class="learn-item">
+        <div class="learn-icon">💋</div>
+        <p><strong>How to lead women to sex faster and more often</strong>How to remove the invisible barriers between you and the physical side — without pressure, without awkwardness, without games</p>
+      </div>
+      <div class="learn-item">
+        <div class="learn-icon">🌟</div>
+        <p><strong>How to attract women through your lifestyle</strong>What your day-to-day life communicates about you — and how to make it magnetic rather than forgettable</p>
+      </div>
+      <div class="learn-item">
+        <div class="learn-icon">🎭</div>
+        <p><strong>Sub-communication: what you say without words</strong>Words account for only 7% of your impact. Your body, voice, and energy say the rest. This shows you what they're saying — and how to change it</p>
+      </div>
+      <div class="learn-item">
+        <div class="learn-icon">🏆</div>
+        <p><strong>How to be demanding — and why that's attractive</strong>Why the man who requires certain standards from women gets more respect, more desire, and better relationships than the man who accepts everything</p>
+      </div>
+      <div class="learn-item">
+        <div class="learn-icon">📖</div>
+        <p><strong>Advanced persuasion — influence over her decisions</strong>The specific mechanism for getting a woman to say yes to what you want — not through manipulation, but through genuinely understanding how she thinks</p>
+      </div>
+      <div class="learn-item">
+        <div class="learn-icon">🎁</div>
+        <p><strong>The secret knowledge that enters your brain and renovates it</strong>After this, you'll have an ease with women and courage that didn't exist before. Not because you memorised anything — because you understood something</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section">
+  <div class="container-wide">
+    <p class="section-label" style="text-align:center">Results</p>
+    <h2 class="section-title" style="text-align:center">What readers <span class="gold">say</span></h2>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"I read this twice in one weekend. By Monday I approached three women I would have walked past before. Two gave me their numbers. I thought I needed to look different. I just needed to think differently."</p>
+        <p class="testi-name">— James K., 29</p>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"I've been in my head about women for years. This book is the first thing that actually changed how I feel about myself around them — not just what I say. The section on building value hit me like a truck. I couldn't put it down."</p>
+        <p class="testi-name">— Michael R., 34</p>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Three months after reading this, my friends started asking me what changed. I didn't tell them I read a book. I just smiled. I'm with someone now I used to think was completely out of my league."</p>
+        <p class="testi-name">— Daniel T., 26</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORDER -->
+<section class="section section-alt" id="order">
+  <div class="container">
+    <p class="section-label">Your order</p>
+    <h2 class="section-title">Get <span class="gold">started</span> now</h2>
+    <p class="lead">This is not a pile of texts to memorise. It's knowledge that changes who you are while you read it. The only requirement is that you're ready to stop deceiving yourself and start doing the work.</p>
+
+    <div class="offer-card featured" style="margin-top:32px;">
+      <div class="offer-badge">Most popular</div>
+      <h3>The Magnetic Man</h3>
+      <p class="offer-desc">The complete guide to becoming the man women are genuinely attracted to — who you are, how you carry yourself, what you say, how you make them feel. 100% satisfaction guaranteed or your money back.</p>
+      <div class="offer-price">$39</div>
+      <p class="offer-price-note">One-time · Instant PDF download · No subscription</p>
+      <ul class="offer-includes">
+        <li>The Magnetic Man — full ebook (instant PDF)</li>
+        <li><strong>Go Get Them — FREE bonus</strong> (step-by-step from leaving the house to returning with a woman)</li>
+        <li>Instant delivery — read it tonight</li>
+        <li>30-day money-back guarantee — no questions</li>
+      </ul>
+
+      <!-- ORDER BUMP -->
+      <div class="order-bump">
+        <div class="order-bump-label">⚡ One-time upgrade — add to your order below</div>
+        <h4>Add: Mastering The Game</h4>
+        <p>Five years of working with real men — the problems that keep coming up, the mistakes that kill results, the exact things that nobody else explains clearly. The communication wheel. How to approach. How to calibrate. How to get what you want on a date. How to handle the most beautiful women. How to be in bed so she only thinks about doing it again with you. This is the advanced manual. Normally $79 — add it now for just $49 more.</p>
+        <div class="bump-checkbox">
+          <input type="checkbox" id="bump" name="bump">
+          <label for="bump">Yes — add <strong>Mastering The Game</strong> to my order for just <strong>$49 more</strong> (save $30). My total becomes $88.</label>
+        </div>
+      </div>
+
+      <button class="btn-primary" style="display:block;width:100%;text-align:center;margin-top:8px;font-size:20px;" onclick="openModal()">
+        Get Instant Access Now
+      </button>
+      <p class="price-tag" style="text-align:center;margin-top:12px;">🔒 Secure checkout · Stripe & PayPal · Instant delivery · 30-day guarantee</p>
+    </div>
+
+    <div class="guarantee">
+      <div class="guarantee-icon">🛡️</div>
+      <div>
+        <h3>30-Day Money-Back Guarantee</h3>
+        <p>Read the book. Apply what's in it. If after 30 days you haven't noticed a real shift in how women respond to you — or if you're not satisfied for any reason at all — email me and I'll refund you immediately. No questions. No hassle. The risk is entirely mine, not yours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section">
+  <div class="container">
+    <p class="section-label">Questions</p>
+    <h2 class="section-title">FAQ</h2>
+    <div class="faq-item">
+      <p class="faq-q">How do I receive the ebook after I order?</p>
+      <p class="faq-a">Immediately after your payment goes through you'll see a download page with direct PDF links. You'll also receive them by email. You can be reading within five minutes of ordering.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">I'm a complete beginner. Will this work for me?</p>
+      <p class="faq-a">The Magnetic Man was written specifically for men who are starting from scratch — or from a difficult place. It meets you where you are and builds from there. Many of the men who have reported the biggest results had never approached a woman before they read this.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q" id="faq-go-get-them">What is "Go Get Them" and why is it free?</p>
+      <p class="faq-a">Go Get Them is the step-by-step practical companion — where to meet women, how to open, what to say, how to get her number, how to take her on a same-day date, how to get her back to yours. It normally sells separately but it comes free with every order today because together the two books cover both the mindset and the practical mechanics completely.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">Aren't "Go Get Them" and "Mastering The Game" about the same thing?</p>
+      <p class="faq-a">No — they're built for different stages. Go Get Them is a practical quick-start guide: where to go, how to open, what to say, how to get her number, how to close. It gets you moving. Mastering The Game goes much deeper — it's the advanced field manual built from five years of working with real men. It covers the communication framework, approach calibration, how to handle the most beautiful women, what to do on a date, and how to be in bed so she only thinks about coming back. Go Get Them gives you the basics to get started. Mastering The Game gives you the level of skill most men never reach.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">What's the difference between The Magnetic Man and Mastering The Game?</p>
+      <p class="faq-a">The Magnetic Man is the foundation — who you are, your mindset, your presence, what women actually respond to and why. Mastering The Game is the advanced field manual — the conversation framework, approach strategy, calibration, the path from first contact to the bedroom. They work as a system. The order bump lets you get both at a significant discount.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">Is there really a no-questions guarantee?</p>
+      <p class="faq-a">Yes. 30 days, full refund, completely no questions. I've stood behind this material since the beginning and I'm not changing that.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<div class="final-cta">
+  <h2>In 20 years,<br><em>which man</em> will you be?</h2>
+  <p class="lead" style="max-width:480px;margin:0 auto 40px;color:#aaa">The empty, lonely man who kept waiting for the right moment — or the fulfilled man who finally took action and has been thanking himself for it ever since. That decision starts right now.</p>
+  <a href="#order" class="btn-primary">Get The Magnetic Man — $39</a>
+  <p class="price-tag" style="margin-top:16px;">+ Go Get Them FREE · 30-day guarantee · Instant delivery</p>
+</div>
+
+<footer>
+  <p style="margin-bottom:12px;">© 2026 Paul Roten · All rights reserved</p>
+  <p><a href="#">Privacy Policy</a> &nbsp;·&nbsp; <a href="#">Terms</a> &nbsp;·&nbsp; <a href="#">Refund Policy</a> &nbsp;·&nbsp; <a href="#">Contact</a></p>
+</footer>
+
+</div><!-- /sales-page -->
+
+
+<!-- ════════════════════════════════════
+     EMAIL CAPTURE MODAL
+════════════════════════════════════ -->
+<div class="modal-overlay" id="email-modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <h3>Almost <span>there</span></h3>
+    <p class="modal-sub">Enter your name and email to receive your download links instantly — and join thousands of men getting weekly insights from Paul Roten.</p>
+    <form id="mc-form"
+      action="https://gmail.us22.list-manage.com/subscribe/post"
+      method="post"
+      target="mc-hidden-iframe"
+      onsubmit="handleMailchimpSubmit(event)"
+      style="display:flex;flex-direction:column;gap:14px;">
+      <input type="hidden" name="u" value="b5d0528210f3837386cc47527">
+      <input type="hidden" name="id" value="273438247d">
+      <input type="text" id="modal-name" name="MERGE1" placeholder="Your first name" autocomplete="given-name" required class="modal-input">
+      <input type="email" id="modal-email" name="MERGE0" placeholder="Your best email address" autocomplete="email" required class="modal-input">
+      <!-- Mailchimp bot trap -->
+      <div style="position:absolute;left:-5000px;" aria-hidden="true">
+        <input type="text" name="b_b5d0528210f3837386cc47527_273438247d" tabindex="-1" value="">
+      </div>
+      <button type="submit" class="btn-primary" style="width:100%;text-align:center;padding:16px 20px;font-size:20px;">Complete My Order →</button>
+    </form>
+    <!-- Hidden iframe so form submits without page reload -->
+    <iframe name="mc-hidden-iframe" style="display:none;"></iframe>
+    <p class="modal-privacy">🔒 Your information is 100% secure and will never be shared. You can unsubscribe anytime.</p>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════
+     UPSELL PAGE — Mastering The Game
+════════════════════════════════════ -->
+<div id="upsell-page">
+  <div style="background:var(--dark);border-bottom:1px solid var(--border);padding:16px 20px;text-align:center;">
+    <p style="font-size:13px;color:var(--muted);">Step 2 of 2 — Complete your order</p>
+  </div>
+  <div class="upsell-inner">
+    <div class="upsell-eyebrow">⚡ One-Time Offer — Disappears when you leave this page</div>
+    <h2>One Upgrade<br>Before You Go — <span class="gold">Only $79</span></h2>
+    <p class="lead">You just got <strong>The Magnetic Man</strong>. Great decision. Now here's the question: do you want the foundation — or do you want the complete system? The men who have both don't just know what attracts women. They know exactly what to do with that attraction at every stage.</p>
+
+    <div class="upsell-story">
+      <p>"When I released The Electricity Between, to this day I have heard dozens of opinions that it is the best seduction product on the market. When I created Mastering The Game, I trained people for five years first — looking for ways to explain even more simply the principles of effectiveness with women. I was aware I was sharing powerful knowledge. Honestly, I even fear what will happen when a bunch of people get access to this material."</p>
+      <cite>— Paul Roten</cite>
+    </div>
+
+    <div class="upsell-big-list">
+      <h4>Inside Mastering The Game — what you'll learn</h4>
+      <ul>
+        <li>How to manage your emotional state for approaches</li>
+        <li>The communication wheel — what every conversation must include</li>
+        <li>Secrets of sub-communication — what she reads before you speak</li>
+        <li>How to choose the right opener for any situation</li>
+        <li>The only best direction in a conversation with a woman</li>
+        <li>The best strategy for difficult, hard-to-get women</li>
+        <li>What to do with your eyes during an approach</li>
+        <li>How to control sexual communication in conversation</li>
+        <li>How to build a sense of uniqueness so she invests more</li>
+        <li>How to expand her vision of meeting you again</li>
+        <li>How to treat women so they surround themselves with you</li>
+        <li>How to avoid scaring her away before the first meeting</li>
+        <li>How to reach high-level calibration with a woman</li>
+        <li>How to get what you want on a date without forcing it</li>
+        <li>How to read hidden signals women embed in conversation</li>
+        <li>How not to over-invest after a date — avoid the trap</li>
+        <li>How the game with beautiful women differs from all others</li>
+        <li>When men misread signs of interest — and how to tell the difference</li>
+        <li>How to play male roles correctly</li>
+        <li>How to be in bed so she only thinks about doing it again with you</li>
+      </ul>
+    </div>
+
+    <p class="lead" style="max-width:580px;margin:0 auto 24px;"><strong>After thoroughly studying Mastering The Game you will become a man with truly high effectiveness with women.</strong> The men I see on the streets trying to seduce women and making fools of themselves — they lack one thing. They lack this.</p>
+
+    <div class="upsell-price">$79</div>
+    <p class="upsell-price-note">One-time · Instant PDF delivery · 30-day guarantee included</p>
+    <button class="btn-primary" style="font-size:20px;padding:20px 52px;" onclick="handleUpsellYes()">
+      Yes — Add Mastering The Game to My Order
+    </button>
+    <span class="upsell-decline" onclick="handleUpsellNo()">No thanks — I only want The Magnetic Man for now</span>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════
+     DOWNSELL PAGE — Electricity Between Bundle
+════════════════════════════════════ -->
+<div id="downsell-page">
+  <div style="background:var(--dark);border-bottom:1px solid var(--border);padding:16px 20px;text-align:center;">
+    <p style="font-size:13px;color:var(--muted);">Special bundle — Available on this page only</p>
+  </div>
+  <div class="upsell-inner">
+    <div class="upsell-eyebrow">Wait — A Different Offer Just For You</div>
+    <h2>My Best Work,<br><span class="gold">Bundled For $69</span></h2>
+    <p class="lead">I understand Mastering The Game wasn't right for you today. But before you go — I want to offer you something different. My most complete, most powerful seduction book. The one people still tell me is the best thing on the market, years after I released it. Bundled with what you just bought, at a price that makes no sense to leave on the table.</p>
+
+    <div class="upsell-story">
+      <p>"This e-book is 150 pages of enlightening reading. It is the best work I have ever created. After this material, you will be an effective seducer, period. It covers topics that are more advanced than The Magnetic Man, yet their readable form makes them accessible to men of every level of experience."</p>
+      <cite>— Paul Roten, on The Electricity Between</cite>
+    </div>
+
+    <div class="upsell-big-list">
+      <h4>The Electricity Between — what you'll learn</h4>
+      <ul>
+        <li>How to create enormous chemistry or make her fall in love</li>
+        <li>How to talk to women so they feel something real</li>
+        <li>How to make her see you as a lover, not a friend</li>
+        <li>Which actions toward women are genuinely seductive</li>
+        <li>What to say to shorten seduction time by 5x</li>
+        <li>The most important rule in conversations with women</li>
+        <li>How to make naughty girls uninhibited around you</li>
+        <li>What to do when she's ready but you don't realise it</li>
+        <li>What to answer when she says "don't look at my boobs"</li>
+        <li>How to remove your resistance to fast sex</li>
+        <li>How to have sex at a breathtaking pace</li>
+        <li>How to make women willingly want to sleep with you</li>
+        <li>How to have a personality that seduces for you</li>
+        <li>Advanced persuasion — influence over her decisions</li>
+        <li>How to discourage her from a boyfriend</li>
+        <li>How to make her knees go weak and do anything for you</li>
+        <li>The language of friendship that accelerates physical contact</li>
+        <li>Discretion — what it builds and why women trust you for it</li>
+        <li>How to build long-term sexual friendships for years</li>
+        <li>The small details that mean everything</li>
+      </ul>
+    </div>
+
+    <p class="lead" style="max-width:580px;margin:0 auto 24px;"><strong>If I had this material 12 years ago, I would not only have avoided enormous pain and confusion — I would not have lost such beautiful, exceptional women who still stay in my head.</strong> Don't make the same mistake I did.</p>
+
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:4px;padding:22px 24px;margin-bottom:28px;text-align:left;">
+      <p style="font-size:13px;color:var(--muted);font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px;">What's included in this bundle</p>
+      <ul style="list-style:none;">
+        <li style="padding:8px 0 8px 22px;position:relative;font-size:14px;color:#ccc;border-bottom:1px solid var(--border);"><span style="position:absolute;left:0;color:var(--green);font-weight:700;">✓</span> <strong>The Electricity Between</strong> — 150 pages, Paul Roten's best work</li>
+        <li style="padding:8px 0 8px 22px;position:relative;font-size:14px;color:#ccc;border-bottom:1px solid var(--border);"><span style="position:absolute;left:0;color:var(--green);font-weight:700;">✓</span> <strong>The Magnetic Man</strong> — already yours</li>
+        <li style="padding:8px 0 8px 22px;position:relative;font-size:14px;color:#ccc;"><span style="position:absolute;left:0;color:var(--green);font-weight:700;">✓</span> <strong>Go Get Them</strong> — free bonus, included</li>
+      </ul>
+    </div>
+
+    <div class="upsell-price">$69</div>
+    <p class="upsell-price-note">Save $30 on The Electricity Between — this offer disappears when you leave</p>
+    <button class="btn-primary" style="font-size:20px;padding:20px 52px;" onclick="handleDownsellYes()">
+      Yes — I Want The Bundle for $69
+    </button>
+    <span class="upsell-decline" onclick="goToThankYou()">No thanks — just deliver what I already bought</span>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════
+     THANK YOU PAGE
+════════════════════════════════════ -->
+<div id="thankyou-page">
+  <div style="background:var(--dark);border-bottom:1px solid var(--border);padding:16px 20px;text-align:center;">
+    <p style="font-size:13px;color:var(--green);font-weight:600;">✓ Payment confirmed — Order complete</p>
+  </div>
+  <div class="ty-inner">
+    <div class="ty-check">✓</div>
+    <h2>You're In.</h2>
+    <p class="ty-sub">Your order is confirmed, <strong id="ty-name">friend</strong>. A confirmation has been sent to <strong id="ty-email"></strong>. Download your books below and start reading tonight.</p>
+
+    <div class="ty-steps">
+      <p style="font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;">Your next steps</p>
+      <div class="ty-step">
+        <div class="ty-step-num">1</div>
+        <div>
+          <h4>Download your books now</h4>
+          <p>Click each button below. Save the PDFs to your phone or computer so you always have them.</p>
+        </div>
+      </div>
+      <div class="ty-step">
+        <div class="ty-step-num">2</div>
+        <div>
+          <h4>Start with The Magnetic Man tonight</h4>
+          <p>Read it in one sitting if you can. Don't skim. Let it change how you think about yourself and women.</p>
+        </div>
+      </div>
+      <div class="ty-step">
+        <div class="ty-step-num">3</div>
+        <div>
+          <h4>Take action tomorrow</h4>
+          <p>Go out. Approach one woman. One is enough. The first step breaks the pattern. Everything changes after that.</p>
+        </div>
+      </div>
+      <div class="ty-step">
+        <div class="ty-step-num">4</div>
+        <div>
+          <h4>Check your email for future updates</h4>
+          <p>You're on Paul Roten's list. You'll receive insights, additional material, and early access to new releases.</p>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;">Your downloads</p>
+    <div class="download-list" id="download-list"></div>
+
+    <div class="ty-note">
+      📧 Download links have also been sent to your email. If you don't see them within 5 minutes, check spam. Any issues? Contact support and we'll sort it immediately.
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════ -->
+<script>
+  let purchases = [];
+  let customerName = '';
+  let customerEmail = '';
+
+  // ── DETECT RETURN FROM STRIPE ──────
+  window.addEventListener('load', function() {
+    const params = new URLSearchParams(window.location.search);
+    const zakup = params.get('zakup');
+
+    if (zakup) {
+      // Restore customer data from sessionStorage
+      customerName  = sessionStorage.getItem('customerName')  || '';
+      customerEmail = sessionStorage.getItem('customerEmail') || '';
+      const saved   = sessionStorage.getItem('purchases');
+      if (saved) purchases = JSON.parse(saved);
+
+      // All zakup values go straight to thank you page
+      showPage('thankyou-page');
+      buildThankYouPage();
+    }
+  });
+
+  // ── MAILCHIMP SUBMIT ───────────────
+  function handleMailchimpSubmit(e) {
+    // Save name & email before form submits to hidden iframe
+    customerName  = document.getElementById('modal-name').value.trim();
+    customerEmail = document.getElementById('modal-email').value.trim();
+    // Let the form post to Mailchimp via iframe (no page reload),
+    // then proceed to checkout after a short delay
+    setTimeout(proceedToCheckout, 800);
+  }
+
+  // ── MODAL ──────────────────────────
+  function openModal() {
+    document.getElementById('email-modal').classList.add('active');
+    document.getElementById('modal-name').focus();
+  }
+
+  function closeModal() {
+    document.getElementById('email-modal').classList.remove('active');
+  }
+
+  
+  function proceedToCheckout() {
+    const bumpChecked = document.getElementById('bump').checked;
+
+    if (bumpChecked) {
+      // Took order bump — go straight to Stripe for bundle $88
+      sessionStorage.setItem('purchases', JSON.stringify(['magnetic-man', 'mastering-the-game', 'go-get-them']));
+      sessionStorage.setItem('customerName', customerName);
+      sessionStorage.setItem('customerEmail', customerEmail);
+      window.location.href = 'https://buy.stripe.com/28E28s4pS5He9OX7rCe7m02'; // Bundle $88
+    } else {
+      // No bump — show upsell page FIRST before any payment
+      showPage('upsell-page');
+    }
+  }
+
+  function handleUpsellYes() {
+    // Accepted upsell — charge bundle $88 (Magnetic Man + Mastering)
+    sessionStorage.setItem('purchases', JSON.stringify(['magnetic-man', 'mastering-the-game', 'go-get-them']));
+    sessionStorage.setItem('customerName', customerName);
+    sessionStorage.setItem('customerEmail', customerEmail);
+    window.location.href = 'https://buy.stripe.com/28E28s4pS5He9OX7rCe7m02'; // Bundle $88
+  }
+
+  function handleUpsellNo() {
+    // Declined upsell — show downsell before payment
+    showPage('downsell-page');
+  }
+
+  function handleDownsellYes() {
+    // Accepted downsell — charge Electricity Between bundle $69
+    sessionStorage.setItem('purchases', JSON.stringify(['magnetic-man', 'electricity-between', 'go-get-them']));
+    sessionStorage.setItem('customerName', customerName);
+    sessionStorage.setItem('customerEmail', customerEmail);
+    window.location.href = 'https://buy.stripe.com/9B68wQ7C4c5Cd193bme7m00'; // Downsell $69
+  }
+
+  function goToThankYou() {
+    // Declined everything — charge basic $39 (Magnetic Man only)
+    sessionStorage.setItem('purchases', JSON.stringify(['magnetic-man', 'go-get-them']));
+    sessionStorage.setItem('customerName', customerName);
+    sessionStorage.setItem('customerEmail', customerEmail);
+    window.location.href = 'https://buy.stripe.com/14A7sMaOgc5CbX57rCe7m04'; // Magnetic Man $39
+  }
+
+  function showPage(id) {
+    ['sales-page','upsell-page','downsell-page','thankyou-page'].forEach(p => {
+      const el = document.getElementById(p);
+      if (el) el.style.display = (p === id) ? 'block' : 'none';
+    });
+    document.getElementById('email-modal').classList.remove('active');
+    window.scrollTo(0, 0);
+  }
+
+  // ── THANK YOU PAGE ─────────────────
+  function buildThankYouPage() {
+    // Show name/email
+    const first = customerName.split(' ')[0];
+    document.getElementById('ty-name').textContent = first || 'friend';
+    document.getElementById('ty-email').textContent = customerEmail || 'your inbox';
+
+    // Build download list
+    const allProducts = {
+      'magnetic-man': {
+        name: 'The Magnetic Man',
+        sub: 'Your core ebook — start here tonight',
+        url: 'https://drive.google.com/file/d/1U8nWLVm6xPopeSgGFMcB1i8KCYAnQA1v/view?usp=sharing',
+        bonus: false
+      },
+      'mastering-the-game': {
+        name: 'Mastering The Game',
+        sub: 'The advanced field manual',
+        url: 'https://drive.google.com/file/d/165SaZaSGAFD9_CpJdYkpaVr7keHEg-Mb/view?usp=sharing',
+        bonus: false
+      },
+      'electricity-between': {
+        name: 'The Electricity Between',
+        sub: 'Paul Roten\'s best work — 150 pages',
+        url: 'https://drive.google.com/file/d/1TR2fPciECIdWCIHggX4KT0etB-MYL2Pp/view?usp=sharing',
+        bonus: false
+      },
+      'go-get-them': {
+        name: '🎁 Go Get Them — FREE Bonus',
+        sub: 'Step-by-step: from leaving the house to returning with a woman',
+        url: 'https://drive.google.com/file/d/1Tx3jI1R_clgrldBBu5oMMGgI7MHTn-yO/view?usp=sharing',
+        bonus: true
+      }
+    };
+
+    const list = document.getElementById('download-list');
+    list.innerHTML = '';
+    purchases.forEach(key => {
+      const p = allProducts[key];
+      if (!p) return;
+      list.innerHTML += `
+        <div class="download-item">
+          <div class="download-item-info">
+            <h4>${p.name}</h4>
+            <span>${p.sub}</span>
+          </div>
+          <a href="${p.url}" class="download-btn ${p.bonus ? 'bonus' : ''}" target="_blank">
+            Download PDF
+          </a>
+        </div>`;
+    });
+  }
+</script>
+
+</body>
+</html>
