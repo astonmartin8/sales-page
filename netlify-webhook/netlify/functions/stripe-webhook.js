@@ -26,6 +26,7 @@ const PRODUCTS = {
 // ── MAPOWANIE: kwota (w centach) → produkty ─────────────────────
 // Dopasuj do swoich Payment Links
 const ORDER_MAP = {
+  100: [PRODUCTS.magneticMan, PRODUCTS.goGetThem],
   3900: [PRODUCTS.magneticMan, PRODUCTS.goGetThem],                                           // $39 — Magnetic Man
   8800: [PRODUCTS.magneticMan, PRODUCTS.masteringTheGame, PRODUCTS.goGetThem],                // $88 — Bundle
   6900: [PRODUCTS.magneticMan, PRODUCTS.electricityBetween, PRODUCTS.goGetThem],             // $69 — Downsell
